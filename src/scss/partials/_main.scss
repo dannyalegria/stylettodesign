@@ -104,7 +104,7 @@ h1 {
         font-size: 35px;
         font-family: 'Roboto Condensed', Helvetica, Helvetica Neue, Arial, sans-serif;
         opacity: 1;
-        margin: 0 0 6px 0; 
+        margin: 0 0 6px 0;
         max-width: 400px;
         text-align: center;
     }
@@ -159,15 +159,15 @@ h1 {
     z-index: 1;
     opacity: 0.5;
     .header-container & {
-        background-image: url(../img/img_mountains01.jpg);
+        background-image: url(../img/brick_background.jpeg);
         background-size: cover;
     }
     #slide01 & {
-        background: url(../img/img_mountains02.jpg) no-repeat center center;
+        background: url(../img/code1.png) no-repeat center center;
         background-size: cover;
     }
     #slide02 & {
-        background: url(../img/img_mountains03.jpg) no-repeat center center;
+        background: url(../img/school_computer.jpeg) no-repeat center center;
         background-size: cover;
     }
     #slide03 & {
@@ -192,7 +192,7 @@ nav {
         position: relative;
         padding-right: 20px;
         color: $lightest;
-        text-decoration: none; 
+        text-decoration: none;
         &:hover {
             .nav-label {
                 transform: translateX(0);
@@ -209,9 +209,9 @@ nav {
         right: 0;
         top: 50%;
         background-color: transparentize($lightest,.1);
-        -webkit-border-radius: 100%; 
+        -webkit-border-radius: 100%;
         border-radius: 100%;
-        transform: translateY(-50%); 
+        transform: translateY(-50%);
         transition: all 0.3s linear;
     }
     .nav-label {

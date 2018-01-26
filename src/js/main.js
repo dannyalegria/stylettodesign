@@ -1,18 +1,18 @@
 (function ($) {
 
 	// Init ScrollMagic
-    var controller = new ScrollMagic.Controller();
+  var controller = new ScrollMagic.Controller();
 
     // get all slides
-	var slides = ["#slide01", "#slide02", "#slide03"];
+	var slides = ["#slide01", "#slide02", "#slide03", "#slide04"];
 
 	// get all headers in slides that trigger animation
-	var headers = ["#slide01 header", "#slide02 header", "#slide03 header"];
+	var headers = ["#slide01 header", "#slide02 header", "#slide03 header", "#slide04 header"];
 
 	// get all break up sections
 	var breakSections = ["#cb01", "#cb02", "#cb03"];
 
-	// number of loaded images for preloader progress 
+	// number of loaded images for preloader progress
 	var loadedCount = 0; //current number of images loaded
 	var imagesToLoad = $('.bcg').length; //number of slides with .bcg container
 	var loadingProgress = 0; //timeline progress - starts at 0
@@ -80,13 +80,13 @@
 		// SCENE 1
 		// create scenes for each of the headers
 		headers.forEach(function (header, index) {
-		    
+
 		    // number for highlighting scenes
 			var num = index+1;
 
 		    // make scene
 		    var headerScene = new ScrollMagic.Scene({
-		        triggerElement: header, // trigger CSS animation when header is in the middle of the viewport 
+		        triggerElement: header, // trigger CSS animation when header is in the middle of the viewport
 		        offset: -95 // offset triggers the animation 95 earlier then middle of the viewport, adjust to your liking
 		    })
 		    .setClassToggle('#slide0'+num, 'is-active') // set class to active slide
@@ -97,13 +97,13 @@
 	    // SCENE 2
 	    // change color of the nav for dark content blocks
 	    breakSections.forEach(function (breakSection, index) {
-		    
+
 		    // number for highlighting scenes
 			var breakID = $(breakSection).attr('id');
 
 		    // make scene
 		    var breakScene = new ScrollMagic.Scene({
-		        triggerElement: breakSection, // trigger CSS animation when header is in the middle of the viewport 
+		        triggerElement: breakSection, // trigger CSS animation when header is in the middle of the viewport
 		        triggerHook: 0.75
 		    })
 		    .setClassToggle('#'+breakID, 'is-active') // set class to active slide
@@ -133,7 +133,7 @@
 			var $bcg = $(slide).find('.bcg');
 
 			var slideParallaxScene = new ScrollMagic.Scene({
-		        triggerElement: slide, 
+		        triggerElement: slide,
 		        triggerHook: 1,
 		        duration: "100%"
 		    })
@@ -152,7 +152,7 @@
 	    	.to($('#intro'), 0.7, {autoAlpha: 0.5, ease:Power1.easeNone}, 0);
 
 		var introScene = new ScrollMagic.Scene({
-	        triggerElement: '#intro', 
+	        triggerElement: '#intro',
 	        triggerHook: 0,
 	        duration: "100%"
 	    })
@@ -167,14 +167,14 @@
 	    pinScene01Tl
 	    	.to($('#slide01 h1'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
 	    	.to($('#slide01 section'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
-	    	.set($('#slide01 h1'), {text: 'Rock Climbing'})
-	    	.set($('#slide01 p'), {text: "Remember that time spent on a rock climb isn't subtracted from your life span."})
+	    	.set($('#slide01 h1'), {text: "Placeholder content"})
+	    	.set($('#slide01 p'), {text: "Placeholder content"})
 	    	.fromTo($('#slide01 h1'), 0.7, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '+=0.4')
 	    	.fromTo($('#slide01 section'), 0.6, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '-=0.6')
 	    	.set($('#slide01 h1'), {autoAlpha: 1}, '+=2');
 
 	    var pinScene01 = new ScrollMagic.Scene({
-	        triggerElement: '#slide01', 
+	        triggerElement: '#slide01',
 	        triggerHook: 0,
 	        duration: "250%"
 	    })
@@ -190,15 +190,15 @@
 	    pinScene02Tl
 	    	.to($('#slide02 h1'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
 	    	.to($('#slide02 section'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
-	    	.set($('#slide02 h1'), {text: "The Memories"})
-	    	.set($('#slide02 p'), {text: "You never climb the same mountain twice, not even in memory. Memory rebuilds the mountain, changes the weather, retells the jokes, remakes all the moves."})
+	    	.set($('#slide02 h1'), {text: "Placeholder content"})
+	    	.set($('#slide02 p'), {text: "Placeholder content"})
 	    	.to($('#slide02 .bcg'), 0.6, {scale: 1.2, transformOrigin: '0% 0%', ease:Power0.easeNone})
 	    	.fromTo($('#slide02 h1'), 0.7, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '+=0.4')
 	    	.fromTo($('#slide02 section'), 0.6, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '-=0.6')
 	    	.set($('#slide02 h1'), {autoAlpha: 1}, '+=2.5');
 
 	    var pinScene02 = new ScrollMagic.Scene({
-	        triggerElement: '#slide02', 
+	        triggerElement: '#slide02',
 	        triggerHook: 0,
 	        duration: "300%"
 	    })
@@ -206,7 +206,35 @@
 	    .setTween(pinScene02Tl)
 	    .addTo(controller);
 
-	    // change behaviour of controller to animate scroll instead of jump
+      // Footer
+      // Define wipe animation
+      // var wipeAnimation = new TimelineMax();
+      //   wipeAnimation.fromTo($(".footer-container"), 1, {y:"0%"}, {y: "50%"}, ease: Linear.easeNone()}'+=0.4');
+      //
+      // var pinScene03 = new ScrollMagic.Scene({
+      //   triggerElement: '#slide03',
+      //   triggerHook: 0,
+      //   duration: "250%"
+      // })
+      // .setPin("#slide03")
+      // .setTween(wipeAnimation)
+      // .addTo(controller);
+
+      var testController = new ScrollMagic.Controller();
+
+      var wipeAnimation = new TimelineMax()
+        .fromTo("section.test-panel.red", 1, {y:"100%"}, {y:"0%", ease: Linear.easeNone})
+
+      new ScrollMagic.scene({
+        triggerElement: "#pinContainer",
+        triggerHook: "onLeave",
+        duration: "300%"
+      })
+      .setPin("#pinContainer")
+      .addIndicators()
+      .addTo(testController);
+
+	  // change behaviour of controller to animate scroll instead of jump
 		controller.scrollTo(function (newpos) {
 			TweenMax.to(window, 1, {scrollTo: {y: newpos}, ease:Power1.easeInOut});
 		});

@@ -283,16 +283,16 @@ h1 {
   z-index: 1;
   opacity: 0.5; }
   .header-container .bcg {
-    background-image: url(../img/img_mountains01.jpg);
+    background-image: url(../img/wood_background.jpeg);
     background-size: cover; }
   #slide01 .bcg {
-    background: url(../img/img_mountains02.jpg) no-repeat center center;
+    background: url(../img/workspace2.jpeg) no-repeat center center;
     background-size: cover; }
   #slide02 .bcg {
-    background: url(../img/img_mountains03.jpg) no-repeat center center;
+    background: url(../img/code1.png) no-repeat center center;
     background-size: cover; }
   #slide03 .bcg {
-    background: url(../img/img_mountains04.jpg) no-repeat center center;
+    background: url(../img/San_Francisco.jpeg) no-repeat center center;
     background-size: cover;
     opacity: 0.7; }
 
@@ -397,13 +397,14 @@ p {
     bottom: 10%; }
   .slide#slide03 .button {
     border-color: #ffffff;
-    color: #212121;
+    /* color: #212121; */
     background-color: rgba(255, 255, 255, 0.9); }
     .slide#slide03 .button:hover {
       border-color: #212121;
       background-color: #212121;
       color: #ffffff; }
   .slide#slide03 .wrapper {
+    position: absolute;
     padding-top: 100px; }
   .slide#slide04 {
     background-color: #be4c2c; }
@@ -438,11 +439,36 @@ p {
     transform: translate3d(0, 0, 0); }
 
 /* =Footer */
+
+#pinContainer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.test-panel {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.blue {
+  background-color: blue;
+  color: white;
+  margin: 0 auto;
+}
+
+.red {
+  background-color: red;
+  color: white;
+  margin: 0 auto;
+}
+
 .footer-container {
   text-align: center;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
-  background-color: #06060d; }
+  background-color: #06060d;}
   .footer-container h3 {
     margin: 0;
     padding: 20px 0;
@@ -520,7 +546,7 @@ p {
       width: 100%;
       margin: 0; }
     .slide#slide01, .slide#slide02, .slide#slide03 {
-      color: #212121; }
+      color: #ffffff; }
       .slide#slide01 .wrapper, .slide#slide02 .wrapper, .slide#slide03 .wrapper {
         top: 20%;
         text-align: center; }
