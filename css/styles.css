@@ -153,6 +153,10 @@ td, th {
   padding: 0; }
 
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
 html {
   color: #222;
   font-size: 1em;
@@ -260,14 +264,23 @@ h1 {
   overflow: hidden; }
 
 /* =Header */
-.header-container {
+.header-container,
+.about,
+.portfolio,
+.contact {
   text-align: center;
   color: #ffffff; }
-  .header-container .wrapper {
+  .header-container .wrapper,
+  .about .wrapper,
+  .portfolio .wrapper,
+  .contact .wrapper {
     padding-top: 120px;
     z-index: 2;
     position: relative; }
-  .header-container .bcg {
+  .header-container .bcg,
+  .about .bcg,
+  .portfolio .bcg,
+  .contact .bcg {
     -webkit-transition: -webkit-transform 4s ease-out;
     transition: -webkit-transform 4s ease-out;
     transition: transform 4s ease-out;
@@ -276,7 +289,10 @@ h1 {
             transform: scale(1.05);
     -webkit-transform-origin: top center;
             transform-origin: top center; }
-  .header-container.is-loaded .bcg {
+  .header-container.is-loaded .bcg,
+  .about.is-loaded .bcg,
+  .portfolio.is-loaded .bcg,
+  .contact.is-loaded .bcg {
     -webkit-transform: scale(1);
             transform: scale(1); }
 
@@ -291,6 +307,15 @@ h1 {
   .header-container .bcg {
     background-image: url(/img/wood_background.jpeg);
     background-size: cover; }
+  .about .bcg {
+    background-image: url(/img/brick_background.jpg);
+    background-size: cover; }
+  .portfolio .bcg {
+    background-image: url(/img/marketing1.jpeg);
+    background-size: cover; }
+  .contact .bcg {
+    background-image: url(/img/design1.jpeg);
+    background-size: cover; }
   #slide01 .bcg {
     background: url(/img/workspace2.jpeg) no-repeat center center;
     background-size: cover; }
@@ -304,7 +329,52 @@ h1 {
 
 /* =Navigation */
 nav {
-  display: none;
+  float: right;
+  width: 60%; }
+  @media only screen and (max-width: 766px) {
+    nav {
+      width: 100%; } }
+  nav ul {
+    list-style: none;
+    overflow: hidden;
+    text-align: right;
+    float: right; }
+    @media only screen and (max-width: 766px) {
+      nav ul {
+        padding-top: 10px;
+        margin-bottom: 22px;
+        float: left;
+        text-align: center;
+        width: 100%; } }
+    nav ul li {
+      display: inline-block;
+      margin-left: 35px;
+      line-height: 1.5;
+      -webkit-transition: font-size 1s;
+      transition: font-size 1s;
+      -webkit-transition: -webkit-text-decoration 1s;
+      transition: -webkit-text-decoration 1s;
+      transition: text-decoration 1s;
+      transition: text-decoration 1s, -webkit-text-decoration 1s;
+      -webkit-transition: color, 1s;
+      transition: color, 1s; }
+      @media only screen and (max-width: 766px) {
+        nav ul li {
+          width: 100%;
+          padding: 7px 0;
+          margin: 0; } }
+      nav ul li:hover {
+        color: #4d4d4d;
+        text-decoration: underline;
+        font-size: 15px; }
+    nav ul a {
+      color: white;
+      text-transform: uppercase;
+      font-size: 12px;
+      text-decoration: none; }
+
+#homeNav {
+  /*display: none;*/
   position: fixed;
   right: 30px;
   top: 50%;
@@ -312,19 +382,19 @@ nav {
           transform: translateY(-50%);
   text-align: right;
   z-index: 100; }
-  nav a {
+  #homeNav a {
     display: block;
     line-height: 25px;
     position: relative;
     padding-right: 20px;
     color: #ffffff;
     text-decoration: none; }
-    nav a:hover .nav-label {
+    #homeNav a:hover .nav-label {
       -webkit-transform: translateX(0);
               transform: translateX(0);
       opacity: 1;
       visibility: visible; }
-  nav .nav-dot {
+  #homeNav .nav-dot {
     display: block;
     width: 10px;
     height: 10px;
@@ -337,7 +407,7 @@ nav {
             transform: translateY(-50%);
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear; }
-  nav .nav-label {
+  #homeNav .nav-label {
     display: block;
     opacity: 0.5;
     visibility: hidden;
@@ -345,20 +415,23 @@ nav {
             transform: translateX(-10px);
     -webkit-transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
     transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
-  nav.is-dark a {
+  #homeNav.is-dark a {
     color: #212121; }
-  nav.is-dark .nav-dot {
+  #homeNav.is-dark .nav-dot {
     background-color: rgba(0, 0, 0, 0.5); }
-  nav.is-light a {
+  #homeNav.is-light a {
     color: #ffffff; }
-  nav.is-light .nav-dot {
+  #homeNav.is-light .nav-dot {
     background-color: rgba(255, 255, 255, 0.5); }
-  nav ul {
+  #homeNav ul {
     margin: 0;
     padding: 0; }
-  nav li {
+  #homeNav li {
     width: auto;
-    list-style: none; }
+    list-style: none;
+    display: block; }
+    #homeNav li:hover {
+      background-color: transparent; }
 
 .scroll-hint {
   color: #212121;
@@ -374,6 +447,77 @@ nav {
   font-family: 'Roboto Condensed', Helvetica, Helvetica Neue, Arial, sans-serif;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 2; }
+
+.blackText {
+  color: #212121; }
+
+.main_h {
+  background-color: rgba(33, 33, 33, 0.25);
+  border-bottom: 1px solid #6e6e6e;
+  position: fixed;
+  max-height: 70px;
+  z-index: 999;
+  width: 100%;
+  background: none;
+  overflow: hidden;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  opacity: 0;
+  top: -100px;
+  padding-bottom: 6px; }
+  @media only screen and (max-width: 766px) {
+    .main_h {
+      padding-top: 25px; } }
+
+.open-nav {
+  max-height: 400px !important; }
+  .open-nav .mobile-toggle {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); }
+
+.sticky {
+  opacity: 1;
+  top: 0px; }
+
+.logo {
+  width: 50px;
+  font-size: 25px;
+  color: #8f8f8f;
+  text-transform: uppercase;
+  float: left;
+  display: block;
+  margin-top: 10px; }
+  @media only screen and (max-width: 766px) {
+    .logo {
+      float: none; } }
+
+.mobile-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  right: 22px;
+  top: 0;
+  width: 30px;
+  -webkit-transition: all 200ms ease-in;
+  transition: all 200ms ease-in; }
+  @media only screen and (max-width: 766px) {
+    .mobile-toggle {
+      display: block; } }
+  .mobile-toggle span {
+    width: 30px;
+    height: 4px;
+    margin-bottom: 6px;
+    border-radius: 1000px;
+    background: #8f8f8f;
+    display: block; }
+
+.row {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 2%; }
 
 /* =Main */
 p {
@@ -405,9 +549,8 @@ p {
       background-color: #212121;
       color: #ffffff; }
   .slide#slide03 .wrapper {
+    bottom: 10%;
     padding-top: 100px; }
-  .slide#slide04 {
-    background-color: #be4c2c; }
 
 .button {
   text-decoration: none;
@@ -420,7 +563,7 @@ p {
   .button:hover {
     border-color: #ffffff;
     background-color: #ffffff;
-    color: #000000; }
+    color: #212121; }
 
 /* =Content Block */
 .content-block {
@@ -443,7 +586,9 @@ p {
   text-align: center;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
-  background-color: #06060d; }
+  background-color: #06060d;
+  height: 50%;
+  width: 100%; }
   .footer-container h3 {
     margin: 0;
     padding: 20px 0;
@@ -489,10 +634,16 @@ p {
   p {
     font-size: 20px; }
   /* =Header */
-  .header-container {
+  .header-container,
+  .about,
+  .portfolio,
+  .contact {
     overflow: hidden;
     position: relative; }
-    .header-container .wrapper {
+    .header-container .wrapper,
+    .about .wrapper,
+    .portfolio .wrapper,
+    .contact .wrapper {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -500,7 +651,10 @@ p {
               transform: translate(-50%, -120%);
       margin: 0;
       padding: 0; }
-    .header-container:before {
+    .header-container:before,
+    .about:before,
+    .portfolio:before,
+    .contact:before {
       font-size: 70em; }
   .scroll-hint {
     font-size: 20px; }
@@ -549,7 +703,7 @@ p {
       margin: 0 auto;
       max-width: 570px; }
     .slide#slide03 .button {
-      border-color: rgba(0, 0, 0, 0.7);
+      border-color: rgba(33, 33, 33, 0.7);
       background-color: transparent;
       color: #212121; }
     .slide#slide03 .bcg {

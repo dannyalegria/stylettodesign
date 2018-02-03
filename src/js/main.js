@@ -1,13 +1,52 @@
 (function ($) {
+  // Site Navigation
+  // Sticky Header
+  $(window).scroll(function() {
+
+      if ($(window).scrollTop() > 100) {
+          $('.main_h').addClass('sticky');
+      } else {
+          $('.main_h').removeClass('sticky');
+      }
+  });
+
+
+  // Mobile Navigation
+  $('.mobile-toggle').click(function() {
+      if ($('.main_h').hasClass('open-nav')) {
+          $('.main_h').removeClass('open-nav');
+      } else {
+          $('.main_h').addClass('open-nav');
+      }
+  });
+
+  $('.main_h li a').click(function() {
+      if ($('.main_h').hasClass('open-nav')) {
+          $('.navigation').removeClass('open-nav');
+          $('.main_h').removeClass('open-nav');
+      }
+  });
+
+  // Navigation Scroll
+  $('#siteNav a').click(function(event) {
+    var id = $(this).attr("href");
+    var offset = 70;
+    var target = $(id).offset().top - offset;
+    $('html, body').animate({
+      scrollTop: target
+    }, 500);
+    event.preventDefault();
+  });
 
 	// Init ScrollMagic
   var controller = new ScrollMagic.Controller();
+  console.log(controller);
 
     // get all slides
-	var slides = ["#slide01", "#slide02", "#slide03", "#slide04"];
+	var slides = ["#slide01", "#slide02", "#slide03"];
 
 	// get all headers in slides that trigger animation
-	var headers = ["#slide01 header", "#slide02 header", "#slide03 header", "#slide04 header"];
+	var headers = ["#slide01 header", "#slide02 header", "#slide03 header"];
 
 	// get all break up sections
 	var breakSections = ["#cb01", "#cb02", "#cb03"];
@@ -94,9 +133,9 @@
 		    .addTo(controller);
 		});
 
-	    // SCENE 2
-	    // change color of the nav for dark content blocks
-	    breakSections.forEach(function (breakSection, index) {
+    // SCENE 2
+    // change color of the nav for dark content blocks
+	  breakSections.forEach(function (breakSection, index) {
 
 		    // number for highlighting scenes
 			var breakID = $(breakSection).attr('id');
@@ -108,48 +147,52 @@
 		    })
 		    .setClassToggle('#'+breakID, 'is-active') // set class to active slide
 		    .on("enter", function (event) {
-			    $('nav').attr('class','is-light');
+			    $("#homeNav").attr('class','is-light');
 			})
 		    .addTo(controller);
 		});
 
-	    // SCENE 3
-	    // change color of the nav back to dark
+    // SCENE 3
+    // change color of the nav back to dark
 		slides.forEach(function (slide, index) {
 
-			var slideScene = new ScrollMagic.Scene({
-		        triggerElement: slide // trigger CSS animation when header is in the middle of the viewport
-		    })
-		    .on("enter", function (event) {
-			    $('nav').removeAttr('class');
-			})
-		    .addTo(controller);
-	    });
+		var slideScene = new ScrollMagic.Scene({
+	        triggerElement: slide // trigger CSS animation when header is in the middle of the viewport
+	    })
+	    .on("enter", function (event) {
+		    $("#homeNav").removeAttr('class');
+		})
+	    .addTo(controller);
+    });
 
-	    // SCENE 4 - parallax effect on each of the slides with bcg
-	    // move bcg container when slide gets into the view
+    slides.forEach(function (slide, index){
+      console.log($(slide).scrollTop());
+    });
+
+    // SCENE 4 - parallax effect on each of the slides with bcg
+    // move bcg container when slide gets into the view
 		slides.forEach(function (slide, index) {
 
-			var $bcg = $(slide).find('.bcg');
+		var $bcg = $(slide).find('.bcg');
 
-			var slideParallaxScene = new ScrollMagic.Scene({
-		        triggerElement: slide,
-		        triggerHook: 1,
-		        duration: "100%"
-		    })
-		    .setTween(TweenMax.from($bcg, 1, {y: '-40%', autoAlpha: 0.3, ease:Power0.easeNone}))
-		    .addTo(controller);
-	    });
+		var slideParallaxScene = new ScrollMagic.Scene({
+	        triggerElement: slide,
+	        triggerHook: 1,
+	        duration: "100%"
+	    })
+	    .setTween(TweenMax.from($bcg, 1, {y: '-40%', autoAlpha: 0.3, ease:Power0.easeNone}))
+	    .addTo(controller);
+    });
 
-	    // SCENE 5 - parallax effect on the intro slide
-	    // move bcg container when intro gets out of the the view
+    // SCENE 5 - parallax effect on the intro slide
+    // move bcg container when intro gets out of the the view
 
-	    var introTl = new TimelineMax();
+    var introTl = new TimelineMax();
 
-	    introTl
-	    	.to($('#intro header, .scroll-hint'), 0.2, {autoAlpha: 0, ease:Power1.easeNone})
-	    	//.to($('#intro .bcg'), 1.4, {y: '20%', ease:Power1.easeOut}, '-=0.2')
-	    	.to($('#intro'), 0.7, {autoAlpha: 0.5, ease:Power1.easeNone}, 0);
+    introTl
+    	.to($('#intro header, .scrollFhint'), 0.2, {autoAlpha: 0, ease:Power1.easeNone})
+    	//.to($('#intro .bcg'), 1.4, {y: '20%', ease:Power1.easeOut}, '-=0.2'f)
+    	.to($('#intro'), 0.7, {autoAlpha: 0.5, ease:Power1.easeNone}, 0);
 
 		var introScene = new ScrollMagic.Scene({
 	        triggerElement: '#intro',
@@ -159,80 +202,61 @@
 	    .setTween(introTl)
 	    .addTo(controller);
 
-	    // SCENE 6 - pin the first section
-	    // and update text
+    // SCENE 6 - pin the first section
+    // and update text
 
-	    var pinScene01Tl = new TimelineMax();
+    var pinScene01Tl = new TimelineMax();
 
-	    pinScene01Tl
-	    	.to($('#slide01 h1'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
-	    	.to($('#slide01 section'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
-	    	.set($('#slide01 h1'), {text: "Placeholder content"})
-	    	.set($('#slide01 p'), {text: "Placeholder content"})
-	    	.fromTo($('#slide01 h1'), 0.7, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '+=0.4')
-	    	.fromTo($('#slide01 section'), 0.6, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '-=0.6')
-	    	.set($('#slide01 h1'), {autoAlpha: 1}, '+=2');
+    pinScene01Tl
+    	.to($('#slide01 h1'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
+    	.to($('#slide01 section'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
+    	.set($('#slide01 h1'), {text: "Placeholder content"})
+    	.set($('#slide01 p'), {text: "Placeholder content"})
+    	.fromTo($('#slide01 h1'), 0.7, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '+=0.4')
+    	.fromTo($('#slide01 section'), 0.6, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '-=0.6')
+    	.set($('#slide01 h1'), {autoAlpha: 1}, '+=2');
 
-	    var pinScene01 = new ScrollMagic.Scene({
-	        triggerElement: '#slide01',
-	        triggerHook: 0,
-	        duration: "250%"
-	    })
-	    .setPin("#slide01")
-	    .setTween(pinScene01Tl)
-	    .addTo(controller);
+    var pinScene01 = new ScrollMagic.Scene({
+        triggerElement: '#slide01',
+        triggerHook: 0,
+        duration: "250%"
+    })
+    .setPin("#slide01")
+    .setTween(pinScene01Tl)
+    .addTo(controller);
 
-	    // SCENE 7 - pin the second section
-	    // and update text
+    // SCENE 7 - pin the second section
+    // and update text
 
-	    var pinScene02Tl = new TimelineMax();
+    var pinScene02Tl = new TimelineMax();
 
-	    pinScene02Tl
-	    	.to($('#slide02 h1'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
-	    	.to($('#slide02 section'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
-	    	.set($('#slide02 h1'), {text: "Placeholder content"})
-	    	.set($('#slide02 p'), {text: "Placeholder content"})
-	    	.to($('#slide02 .bcg'), 0.6, {scale: 1.2, transformOrigin: '0% 0%', ease:Power0.easeNone})
-	    	.fromTo($('#slide02 h1'), 0.7, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '+=0.4')
-	    	.fromTo($('#slide02 section'), 0.6, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '-=0.6')
-	    	.set($('#slide02 h1'), {autoAlpha: 1}, '+=2.5');
+    pinScene02Tl
+    	.to($('#slide02 h1'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
+    	.to($('#slide02 section'), 0.2, {autoAlpha: 0, ease:Power1.easeNone}, 1.5)
+    	.set($('#slide02 h1'), {text: "Placeholder content"})
+    	.set($('#slide02 p'), {text: "Placeholder content"})
+    	.to($('#slide02 .bcg'), 0.6, {scale: 1.2, transformOrigin: '0% 0%', ease:Power0.easeNone})
+    	.fromTo($('#slide02 h1'), 0.7, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '+=0.4')
+    	.fromTo($('#slide02 section'), 0.6, {y: '+=20'}, {y: 0, autoAlpha: 1, ease:Power1.easeOut}, '-=0.6')
+    	.set($('#slide02 h1'), {autoAlpha: 1}, '+=2.5');
 
-	    var pinScene02 = new ScrollMagic.Scene({
-	        triggerElement: '#slide02',
-	        triggerHook: 0,
-	        duration: "300%"
-	    })
-	    .setPin("#slide02")
-	    .setTween(pinScene02Tl)
-	    .addTo(controller);
-
-      // Footer
-      // Define wipe animation
-      // var wipeAnimation = new TimelineMax();
-      //   wipeAnimation.fromTo($(".footer-container"), 1, {y:"0%"}, {y: "50%"}, ease: Linear.easeNone()}'+=0.4');
-      //
-      // var pinScene03 = new ScrollMagic.Scene({
-      //   triggerElement: '#slide03',
-      //   triggerHook: 0,
-      //   duration: "250%"
-      // })
-      // .setPin("#slide03")
-      // .setTween(wipeAnimation)
-      // .addTo(controller);
-
-      var testController = new ScrollMagic.Controller();
-
-      var wipeAnimation = new TimelineMax()
-        .fromTo("section.test-panel.red", 1, {y:"100%"}, {y:"0%", ease: Linear.easeNone})
-
-      new ScrollMagic.scene({
-        triggerElement: "#pinContainer",
-        triggerHook: "onLeave",
+    var pinScene02 = new ScrollMagic.Scene({
+        triggerElement: '#slide02',
+        triggerHook: 0,
         duration: "300%"
-      })
-      .setPin("#pinContainer")
-      .addIndicators()
-      .addTo(testController);
+    })
+    .setPin("#slide02")
+    .setTween(pinScene02Tl)
+    .addTo(controller);
+
+
+    var pinScene03 = new ScrollMagic.Scene({
+      triggerElement: '#slide03',
+      triggerHook: "0",
+      duration: "150%"
+    })
+    .setPin("#slide03")
+    .addTo(controller);
 
 	  // change behaviour of controller to animate scroll instead of jump
 		controller.scrollTo(function (newpos) {

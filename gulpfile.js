@@ -35,7 +35,9 @@ gulp.task('jshint', function() {
 // Ugligy JS
 gulp.task('compress', function() {
   return gulp.src('src/js/*.js')
-    .pipe(uglify())
+    .pipe(uglify().on('error', function(e){
+            console.log(e);
+         }))
     .pipe(gulp.dest('js'));
 });
 

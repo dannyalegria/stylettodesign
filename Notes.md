@@ -5,7 +5,7 @@
 * Fill in content and images
 * Add a site navigation, in addition to the homepage navigation.
   - Site navigation class="site-nav"
-  - Homepage navigation class="home-nav"
+  - Homepage navigation class="homeNav"
     -- Give each existing <nav> this class. Files where the current nav is targeted:
       * \index.html 
       * \css\styles.css
